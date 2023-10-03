@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: 60.0),
+              padding: const EdgeInsets.only(top: 60.0, bottom: 60),
               child: Center(
                 child: Container(
                     width: 200,
@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
                     /*decoration: BoxDecoration(
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(50.0)),*/
-                    child: Image.asset('asset/images/flutter-logo.png')),
+                    child: Image.asset('assets/images/hawaii-image.jpg')),
               ),
             ),
             Padding(
@@ -35,37 +35,28 @@ class _LoginPageState extends State<LoginPage> {
               child: TextField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Email',
+                    labelText: 'UHM Email',
                     hintText: 'Enter valid email id as abc@gmail.com'),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+                  left: 15.0, right: 15.0, top: 15, bottom: 20),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
 
                 obscureText: true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Password',
+                    labelText: 'UHM Password',
                     hintText: 'Enter secure password'),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: (){
-                //TODO FORGOT PASSWORD SCREEN GOES HERE
-              },
-              child: Text(
-                'Forgot Password',
-                style: TextStyle(color: Colors.blue, fontSize: 15),
               ),
             ),
             Container(
               height: 50,
               width: 250,
               decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+                  color: Colors.green[800], ),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -73,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 child: Text(
                   'Login',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
+                  style: TextStyle(color: Colors.green[800], fontSize: 25),
                 ),
               ),
             ),
