@@ -5,13 +5,13 @@ import 'messages.dart';
 import 'marketplace.dart';
 
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class MessagesPage extends StatefulWidget {
+  const MessagesPage({super.key});
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _MessagesPageState createState() => _MessagesPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _MessagesPageState extends State<MessagesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,11 +19,10 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Center(
         child: Container(
           width: 500,
-            child: Text(
-              'Basic profile page, will include classes, basic personal info, major, interests, etc.',
-            ),
-          ),
+          child: Text(
+            'Basic messaging page, allows students to connect with clubs and other students, ask them questions etc.'  ),
         ),
+      ),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
@@ -51,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
               ),
               ListTile(
-                title: Text("Messages"),
+                title: Text("Messages Page"),
                 trailing: Icon(Icons.arrow_forward),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -75,6 +74,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
         ),
       ),
-      );
+    );
   }
 }

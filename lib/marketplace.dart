@@ -5,13 +5,13 @@ import 'messages.dart';
 import 'marketplace.dart';
 
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class MarketplacePage extends StatefulWidget {
+  const MarketplacePage({super.key});
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _MarketplacePageState createState() => _MarketplacePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _MarketplacePageState extends State<MarketplacePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,11 +19,10 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Center(
         child: Container(
           width: 500,
-            child: Text(
-              'Basic profile page, will include classes, basic personal info, major, interests, etc.',
-            ),
-          ),
+          child: Text(
+              'Shows a college life specific marketplace where students can buy and sell things like used mopeds, shelves, fans, and other commonly used college items to other students. This will be a possible revenue stream through taking a percentage of the sales and will make life a lot easier for a lot of students.'  ),
         ),
+      ),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
@@ -75,6 +74,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
         ),
       ),
-      );
+    );
   }
 }
