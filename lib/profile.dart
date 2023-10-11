@@ -3,6 +3,7 @@ import 'home.dart';
 import 'profile.dart';
 import 'messages.dart';
 import 'marketplace.dart';
+import 'data.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -22,7 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 250,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.red, Colors.deepOrange.shade300],
+                colors: [Colors.green, Colors.green.shade900],
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
                 stops: [0.5, 0.9],
@@ -36,28 +37,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     CircleAvatar(
-                      backgroundColor: Colors.red.shade300,
-                      minRadius: 35.0,
-                      child: Icon(
-                          Icons.call,
-                          size: 30.0
-                      ),
-                    ),
-                    CircleAvatar(
                       backgroundColor: Colors.white70,
                       minRadius: 60.0,
                       child: CircleAvatar(
                         radius: 50.0,
                         backgroundImage:
-                        AssetImage('assets/images/perfil-min.jpg'),
-                      ),
-                    ),
-                    CircleAvatar(
-                      backgroundColor: Colors.red.shade300,
-                      minRadius: 35.0,
-                      child: Icon(
-                          Icons.message,
-                          size: 30.0
+                        AssetImage('assets/images/hawaii-image.jpg'),
                       ),
                     ),
                   ],
@@ -66,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 10,
                 ),
                 Text(
-                  'Leonardo Palmeiro',
+                  ProfileValues.userName,
                   style: TextStyle(
                     fontSize: 35,
                     fontWeight: FontWeight.bold,
@@ -74,64 +59,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Text(
-                  'Flutter Developer',
+                  ProfileValues.userMajor,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    color: Colors.deepOrange.shade300,
-                    child: ListTile(
-                      title: Text(
-                        '5000',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: Colors.white,
-                        ),
-                      ),
-                      subtitle: Text(
-                        'Followers',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white70,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    color: Colors.red,
-                    child: ListTile(
-                      title: Text(
-                        '5000',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: Colors.white,
-                        ),
-                      ),
-                      subtitle: Text(
-                        'Following',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white70,
-                        ),
-                      ),
-                    ),
                   ),
                 ),
               ],
@@ -144,13 +75,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   title: Text(
                     'Email',
                     style: TextStyle(
-                      color: Colors.deepOrange,
+                      color: Colors.green.shade900,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   subtitle: Text(
-                    'palmeiro.leonardo@gmail.com',
+                    ProfileValues.userEmail,
                     style: TextStyle(
                         fontSize: 18
                     ),
@@ -159,32 +90,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 Divider(),
                 ListTile(
                   title: Text(
-                    'GitHub',
+                    'Interests',
                     style: TextStyle(
-                      color: Colors.deepOrange,
+                      color: Colors.green.shade900,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   subtitle: Text(
-                    'https://github.com/leopalmeiro',
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
-                  ),
-                ),
-                Divider(),
-                ListTile(
-                  title: Text(
-                    'Linkedin',
-                    style: TextStyle(
-                      color: Colors.deepOrange,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Text(
-                    'www.linkedin.com/in/leonardo-palmeiro-834a1755',
+                    ProfileValues.userInterest,
                     style: TextStyle(
                         fontSize: 18
                     ),

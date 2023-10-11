@@ -11,3 +11,16 @@ class DemoValues {
   static final String postTitle = "Sample Class";
 
 }
+
+class ProfileValues {
+  static final String userImage = "assets/images/hawaii-image.jpg";
+  static final String userMajor = "Major";
+  static final String userName = "Zachary Thompson";
+  static final String userEmail = "zp6@hawaii.edu";
+  static final String userInterest = "Volleyball, Coding, 3D Art etc.";
+}
+
+class MessageValues {
+  static final String text = "Hey, how is this class?";
+  static final isCurrentUser = true;
+}

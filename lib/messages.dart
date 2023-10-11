@@ -3,6 +3,7 @@ import 'home.dart';
 import 'profile.dart';
 import 'messages.dart';
 import 'marketplace.dart';
+import 'data.dart';
 
 
 class MessagesPage extends StatefulWidget {
@@ -17,11 +18,27 @@ class _MessagesPageState extends State<MessagesPage> {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: Container(
-          width: 500,
-          child: Text(
-            'Basic messaging page, allows students to connect with clubs and other students, ask them questions etc.'  ),
-        ),
+        child: Align(
+    // align the child within the container
+            alignment: MessageValues.isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
+            child: DecoratedBox(
+    // chat bubble decoration
+              decoration: BoxDecoration(
+                color: MessageValues.isCurrentUser ? Colors.green.shade900 : Colors.grey[300],
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Text(
+                  MessageValues.text,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  color: MessageValues.isCurrentUser ? Colors.white : Colors.black87),
+                ),
+              ),
+
+            ) ,
+
+          ),
       ),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
