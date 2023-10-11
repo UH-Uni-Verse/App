@@ -4,11 +4,13 @@ import 'home.dart';
 import 'profile.dart';
 import 'messages.dart';
 import 'marketplace.dart';
+import 'post_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
   @override
   _HomePageState createState() => _HomePageState();
+
 }
 // break
 
@@ -25,11 +27,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: Container(
-          width: 500,
-          child: Text(
-            'Home/Explore page, This is the main hub of the app. This is where all students will get automatically updated classes, student groups, and other students. You can filter by class, students, and clubs/groups. This is innovative because it creates a single place for a lot of students to connect. It allows students to better pursue their interests, and it will overall make life easier for a lot of students looking to adjust to living far from home or people who just need to connect with others.'
-          ),
+        child: ListView.builder(
+          itemCount: 5,
+          itemBuilder: (BuildContext context, int index) {
+            return PostCard();
+          },
         ),
       ),
       drawer: Drawer(
