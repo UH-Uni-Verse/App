@@ -24,3 +24,10 @@ class MessageValues {
   static final String text = "Hey, how is this class?";
   static final isCurrentUser = true;
 }
+
+class ClassInfo {
+  static final String className = "ICS 691, App Developement";
+  static final String professor = "Philip Johnson";
+  static final String classDescription = "Venture through flutter and dart to create fun new apps!, etc.";
+  static final String studentsEnrolled = "John doe, Jane doe, Lebron James, Damian Lillard, Jimmy Butler, etc.";
+}
