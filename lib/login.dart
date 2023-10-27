@@ -7,8 +7,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  List<String> allowedEmails = [
+    'zp6@hawaii.edu',
+    'user1@hawaii.edu',
+    // Add more allowed email addresses here
+  ];
+  String enteredEmail = '';
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -33,10 +40,15 @@ class _LoginPageState extends State<LoginPage> {
               //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
+                onChanged: (value) {
+                  setState(() {
+                    enteredEmail = value;
+                  });
+                },
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'UHM Email',
-                    hintText: 'Enter valid email id as abc@gmail.com'),
+                    hintText: 'Enter valid email id as abc@hawaii.edu'),
               ),
             ),
             Padding(
@@ -59,8 +71,11 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.green[800], ),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => HomePage()));
+                  if (allowedEmails.contains(enteredEmail)) {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage()));
+                  } else {
+                    // Show an error message or take other actions for unauthorized users
+                  }
                 },
                 child: Text(
                   'Login',

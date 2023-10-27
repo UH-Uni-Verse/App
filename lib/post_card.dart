@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:app/data.dart';
+import 'package:app/data_model/class_data.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:app/data_model/class_provider.dart';
 import 'themes.dart';
 import 'class.dart';
 
@@ -36,9 +38,11 @@ class _PostTitleAndSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final TextStyle titleTheme = Theme.of(context).TextThemes.title;
-    //final TextStyle summaryTheme = Theme.of(context).TextThemes.body1;
-    final String title = DemoValues.postTitle;
+    final container = ProviderContainer(); // Create a ProviderContainer
+
+    // Use the container to read the providers
+    final userDB = container.read(userDBProvider);
+    UserData userData = userDB.getUser('class-001');
 
     return Expanded(
       flex: 3,
@@ -46,19 +50,22 @@ class _PostTitleAndSummary extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Text(title, style: TextThemes.title),
+          Text(userData.name, style: TextThemes.title),
         ],
       ),
     );
   }
 }
 
+
+
 class _PostImage extends StatelessWidget {
   const _PostImage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(flex: 2, child: Image.asset(DemoValues.postImage));
+    UserData userData = userDB.getUser('class-001');
+    return Expanded(flex: 2, child: Image.asset(userData.imagePath));
   }
 }
 
@@ -78,14 +85,15 @@ class _UserNameAndEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserData userData = userDB.getUser('class-001');
     return Expanded(
       flex: 7,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(DemoValues.userName),
-          Text(DemoValues.userEmail),
+          Text(userData.name),
+          Text(userData.email),
 
         ],
       ),
@@ -98,10 +106,11 @@ class _UserImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserData userData = userDB.getUser('class-001');
     return Expanded(
       flex: 1,
       child: CircleAvatar(
-        backgroundImage: AssetImage(DemoValues.userImage),
+        backgroundImage: AssetImage(userData.imagePath),
       ),
     );
   }

@@ -3,7 +3,8 @@ import 'home.dart';
 import 'profile.dart';
 import 'messages.dart';
 import 'marketplace.dart';
-import 'data.dart';
+import 'data_model/user_data.dart';
+import 'data_model/message_data.dart';
 
 
 class MessagesPage extends StatefulWidget {

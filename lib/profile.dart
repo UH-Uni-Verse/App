@@ -3,7 +3,7 @@ import 'home.dart';
 import 'profile.dart';
 import 'messages.dart';
 import 'marketplace.dart';
-import 'data.dart';
+import 'data_model/user_data.dart';
 
 
 class ProfilePage extends StatefulWidget {
@@ -15,6 +15,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    UserData userData = userDB.getUser('user-001');
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
@@ -51,7 +52,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 10,
                 ),
                 Text(
-                  ProfileValues.userName,
+                  //ProfileValues.userName,
+                  userData.name,
                   style: TextStyle(
                     fontSize: 35,
                     fontWeight: FontWeight.bold,
@@ -59,7 +61,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Text(
-                  ProfileValues.userMajor,
+                  //ProfileValues.userMajor,
+                  userData.email,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,
@@ -81,7 +84,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   subtitle: Text(
-                    ProfileValues.userEmail,
+                   // ProfileValues.userEmail,
+                    userData.email,
                     style: TextStyle(
                         fontSize: 18
                     ),
@@ -98,7 +102,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   subtitle: Text(
-                    ProfileValues.userInterest,
+                    //ProfileValues.userInterest,
+                    userData.email,
                     style: TextStyle(
                         fontSize: 18
                     ),
