@@ -1,10 +1,9 @@
-import 'package:app/profile.dart';
+import 'user/profile.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
-import 'profile.dart';
-import 'messages.dart';
-import 'marketplace.dart';
-import 'post_card.dart';
+import 'user/messages.dart';
+import 'marketplace/marketplace.dart';
+import 'user/presentation/post_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

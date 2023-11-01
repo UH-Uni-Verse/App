@@ -1,27 +1,44 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'profile.dart';
-import 'messages.dart';
-import 'marketplace.dart';
+import 'package:app/features/home.dart';
+import 'package:app/features/user/profile.dart';
+import 'package:app/features/marketplace/marketplace.dart';
+import 'package:app/features/user/data/user_data.dart';
+import 'package:app/features/user/data/message_data.dart';
 
 
-class MarketplacePage extends StatefulWidget {
-  const MarketplacePage({super.key});
+class MessagesPage extends StatefulWidget {
+  const MessagesPage({super.key});
   @override
-  _MarketplacePageState createState() => _MarketplacePageState();
+  _MessagesPageState createState() => _MessagesPageState();
 }
 
-class _MarketplacePageState extends State<MarketplacePage> {
+class _MessagesPageState extends State<MessagesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: Container(
-          width: 500,
-          child: Text(
-              'Shows a college life specific marketplace where students can buy and sell things like used mopeds, shelves, fans, and other commonly used college items to other students. This will be a possible revenue stream through taking a percentage of the sales and will make life a lot easier for a lot of students.'  ),
-        ),
+        child: Align(
+    // align the child within the container
+            alignment: MessageValues.isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
+            child: DecoratedBox(
+    // chat bubble decoration
+              decoration: BoxDecoration(
+                color: MessageValues.isCurrentUser ? Colors.green.shade900 : Colors.grey[300],
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Text(
+                  MessageValues.text,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  color: MessageValues.isCurrentUser ? Colors.white : Colors.black87),
+                ),
+              ),
+
+            ) ,
+
+          ),
       ),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
@@ -50,7 +67,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
 
               ),
               ListTile(
-                title: Text("Messages"),
+                title: Text("Messages Page"),
                 trailing: Icon(Icons.arrow_forward),
                 onTap: () {
                   Navigator.of(context).pop();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'user_model.dart';
-import 'package:app/data_model/user_data.dart';
+import 'package:app/features/user/data/user_data.dart';
+import 'package:app/features/class/class.dart';
 
 class PostModel {
   final String id, title, summary, body, imageURL;

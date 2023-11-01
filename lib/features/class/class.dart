@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'profile.dart';
-import 'messages.dart';
-import 'marketplace.dart';
-import 'data_model/class_data.dart';
-import 'package:app/data_model/class_provider.dart';
+import 'package:app/features/home.dart';
+import 'package:app/features/user/profile.dart';
+import 'package:app/features/user/messages.dart';
+import 'package:app/features/marketplace/marketplace.dart';
+import 'package:app/features/class/data/class_data.dart';
+import 'package:app/features/class/data/class_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 

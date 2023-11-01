@@ -1,4 +1,4 @@
-import 'class_data.dart';
+import 'package:app/features/class/data/class_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// The data associated with each garden.

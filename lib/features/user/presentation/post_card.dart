@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:app/data_model/class_data.dart';
+import 'package:app/features/class/data/class_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:app/data_model/class_provider.dart';
-import 'themes.dart';
-import 'class.dart';
+import 'package:app/features/class/data/class_provider.dart';
+import 'package:app/features/user/presentation/themes.dart';
+import 'package:app/features/class/class.dart';
 
 class PostCard extends StatelessWidget {
   const PostCard({super.key});

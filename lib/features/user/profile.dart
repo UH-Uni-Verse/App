@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'profile.dart';
-import 'messages.dart';
-import 'marketplace.dart';
-import 'data_model/user_data.dart';
+import 'package:app/features/home.dart';
+import 'package:app/features/user/profile.dart';
+import 'package:app/features/user/messages.dart';
+import 'package:app/features/marketplace/marketplace.dart';
+import 'package:app/features/user/data/user_data.dart';
 
 
 class ProfilePage extends StatefulWidget {

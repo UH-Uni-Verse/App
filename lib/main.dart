@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
-import 'home.dart';
+import 'features/user/login.dart';
+import 'package:app/features/home.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
