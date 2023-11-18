@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app/features/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -7,12 +9,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   List<String> allowedEmails = [
     'zp6@hawaii.edu',
     'user1@hawaii.edu',
     // Add more allowed email addresses here
   ];
   String enteredEmail = '';
+
   @override
   Widget build(BuildContext context) {
 
@@ -68,13 +72,15 @@ class _LoginPageState extends State<LoginPage> {
               height: 50,
               width: 250,
               decoration: BoxDecoration(
-                  color: Colors.green[800], ),
+                color: Colors.green[800],
+              ),
               child: ElevatedButton(
-                onPressed: () {
-                  if (allowedEmails.contains(enteredEmail)) {
+                onPressed: () async {
+                  if (await signInUser(enteredEmail)) {
                     Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage()));
                   } else {
                     // Show an error message or take other actions for unauthorized users
+                    showErrorMessage();
                   }
                 },
                 child: Text(
@@ -89,6 +95,27 @@ class _LoginPageState extends State<LoginPage> {
             Text('New User? Create Account')
           ],
         ),
+      ),
+    );
+  }
+  Future<bool> signInUser(String email) async {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: 'universe', // Replace with the actual password
+      );
+      return allowedEmails.contains(email);
+    } on FirebaseAuthException catch (e) {
+      print('Failed to sign in: $e');
+      return false;
+    }
+  }
+  void showErrorMessage() {
+    // Implement your error message display logic here
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Authentication failed. Please check your credentials.'),
+        duration: Duration(seconds: 3),
       ),
     );
   }

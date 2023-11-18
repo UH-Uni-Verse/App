@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'features/user/login.dart';
 import 'package:app/features/home.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-void main() {
   runApp(
       ProviderScope(
-        child: MyApp()));
+          child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +27,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/login',
       routes: {
         '/login': (BuildContext context) => LoginPage(),
-        // '/': (BuildContext context) => const HomePage(),
+        '/home': (BuildContext context) => const HomePage(),
       },
       theme: ThemeData(
         // This is the theme of your application.
