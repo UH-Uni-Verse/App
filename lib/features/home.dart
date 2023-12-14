@@ -1,24 +1,24 @@
-import 'user/profile.dart';
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'user/profile.dart';
 import 'user/messages.dart';
 import 'marketplace/marketplace.dart';
 import 'user/presentation/post_card.dart';
+import 'class/data/class_data.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
-
 }
-// break
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  late List<String> classIDs;
+
+  @override
+  void initState() {
+    super.initState();
+    classIDs = userDB2.getClassIDs();
   }
 
   @override
@@ -27,16 +27,13 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(),
       body: Center(
         child: ListView.builder(
-          itemCount: 5,
+          itemCount: classIDs.length,
           itemBuilder: (BuildContext context, int index) {
-            return PostCard();
+            return PostCard(classID: classIDs[index]);
           },
         ),
       ),
       drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -57,7 +54,6 @@ class _HomePageState extends State<HomePage> {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => ProfilePage()));
               },
-
             ),
             ListTile(
               title: Text("Messages"),
@@ -67,7 +63,6 @@ class _HomePageState extends State<HomePage> {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => MessagesPage()));
               },
-
             ),
             ListTile(
               title: Text("Marketplace"),
@@ -77,35 +72,32 @@ class _HomePageState extends State<HomePage> {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => MarketplacePage()));
               },
-
             ),
-            //add new pages here
-          ]
-
+          ],
         ),
       ),
-
     );
   }
-  Widget body(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          height: 80,
-          width: 150,
-          decoration: BoxDecoration(
-              color: Colors.blue, borderRadius: BorderRadius.circular(10)),
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text(
-              'Welcome',
-              style: TextStyle(color: Colors.white, fontSize: 25),
-            ),
+}
+
+Widget body(BuildContext context) {
+  return Scaffold(
+    body: Center(
+      child: Container(
+        height: 80,
+        width: 150,
+        decoration: BoxDecoration(
+            color: Colors.blue, borderRadius: BorderRadius.circular(10)),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text(
+            'Welcome',
+            style: TextStyle(color: Colors.white, fontSize: 25),
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
 }

@@ -1,93 +1,93 @@
 import 'class_data.dart';
 
-/// The data associated with each garden.
-class UserData {
-  UserData(
-      {required this.id,
-        required this.name,
-        required this.major,
-        required this.email,
-        required this.imagePath,
-        List<String>? editorIDs,
-        List<String>? viewerIDs})
-      : editorIDs = editorIDs ?? [],
+final List<UserData2> _classes = [];
+
+class UserData2 {
+  UserData2({
+    required this.id,
+    required this.name,
+    required this.professor,
+    required this.students,
+    required this.description,
+    required this.imagePath,
+    required this.imagePath2,
+    List<String>? editorIDs,
+    List<String>? viewerIDs,
+  })  : editorIDs = editorIDs ?? [],
         viewerIDs = viewerIDs ?? [];
 
   String id;
   String name;
-  String major;
+  String professor;
   String imagePath;
-  String email;
+  String imagePath2;
+  String students;
+  String description;
   List<String> editorIDs;
   List<String> viewerIDs;
+
+  static UserData2 getUserByName(String userName) {
+    return _classes.firstWhere((data) => _containsName(data.students, userName));
+  }
+
+  static bool _containsName(String students, String userName) {
+    List<String> studentNames = students.split(',').map((name) => name.trim()).toList();
+    return studentNames.contains(userName);
+  }
 }
 
 /// Provides access to and operations on all defined Gardens.
-class UserDB {
-  final List<UserData> _users = [
-    UserData(
-        id: 'class-001',
+class UserDB2 {
+  final List<UserData2> _classes = [
+    UserData2(
+        id: '001',
         name: 'ICS 691',
-        major: '19 beds, 162 plantings (2022)',
+        professor: 'Philip Johnson',
         imagePath: 'assets/images/class_icon.png',
-        email: 'Philip Johnson',
+        imagePath2: 'assets/images/default-profile.jpg',
+        students: 'Zachary Thompson, Sally Fletcher, Dewey Price, Jeff Hernandez, Rachel Johnson',
+        description: 'Learn how to use flutter to create your own app. Involves in depth exploration into the app development process.',
         editorIDs: ['user-002'],
         viewerIDs: ['user-003', 'user-005']),
-    UserData(
-        id: 'garden-002',
-        name: 'Kale is for Kids',
-        major: '17 beds, 149 plantings (2022)',
-        imagePath: 'assets/images/garden-002.jpg',
-        email: 'user-002',
+    UserData2(
+        id: '002',
+        name: 'ICS 110P',
+        professor: 'Dave Stevens',
+        imagePath: 'assets/images/class_icon.png',
+        imagePath2: 'assets/images/default-profile.jpg',
+        students: 'Zachary Thompson, Sally Fletcher, Dewey Price, Jeff Hernandez, Rachel Johnson',
+        description: 'Learn the basics of coding in python.',
         viewerIDs: ['user-001', 'user-005']),
-    UserData(
-        id: 'garden-003',
-        name: 'Kaimake Loop',
-        major: '1 beds, 5 plantings (2022)',
-        imagePath: 'assets/images/garden-003.jpg',
-        email: 'user-004',
+    UserData2(
+        id: '003',
+        name: 'ECON 321',
+        professor: 'Mustafa Shirzad',
+        imagePath: 'assets/images/class_icon.png',
+        imagePath2: 'assets/images/default-profile.jpg',
+        students: 'Zachary Thompson, Sally Fletcher, Dewey Price, Jeff Hernandez, Rachel Johnson',
+        description: 'Learn the basics of statistics.',
         viewerIDs: ['user-005'],
-        editorIDs: ['user-003'])
+        editorIDs: ['user-003']),
+    UserData2(
+        id: '004',
+        name: 'KRS 137',
+        professor: 'Micheal Jordan',
+        imagePath: 'assets/images/class_icon.png',
+        imagePath2: 'assets/images/default-profile.jpg',
+        students: 'Zachary Thompson, Sally Fletcher, Dewey Price, Jeff Hernandez, Rachel Johnson',
+        description: 'Learn the fundamentals of basketball.',
+        viewerIDs: ['user-005'],
+        editorIDs: ['user-003']),
+
   ];
 
-  UserData getUser(String userID) {
-    return _users.firstWhere((data) => data.id == userID);
+  UserData2 getUser(String classID) {
+    return _classes.firstWhere((data) => data.id == classID);
   }
 
-  List<String> getUserIDs() {
-    return _users.map((data) => data.id).toList();
+  List<String> getClassIDs() {
+    return _classes.map((data) => data.id).toList();
   }
-
-  List<String> getAssociatedUserIDs({String? userID, String? chapterID}) {
-    if (userID != null) {
-      return getUserIDs()
-          .where((userID) => _userIsAssociated(userID, userID))
-          .toList();
-    }
-    // if (chapterID != null) {
-    //   return getUserIDs()
-    //       .where((userID) => getUser(userID).chapterID == chapterID)
-    //       .toList();
-    // }
-    return [];
-  }
-  bool _userIsAssociated(String gardenID, String userID) {
-    UserData data = getUser(gardenID);
-    return ((data.email == userID) ||
-        (data.viewerIDs.contains(userID)) ||
-        (data.editorIDs.contains(userID)));
-  }
-
-  UserData getOwner(String userID) {
-    UserData data = getUser(userID);
-    return userDB.getUser(data.email);
-  }
-
-//   ClassData getClass(String userID) {
-//     UserData data = getUser(userID);
-//     return classDB.getChapter(data.chapterID);
-//   }
 }
 
-/// The singleton instance of a gardenDB used by clients to access garden data.
-UserDB userDB = UserDB();
+UserDB2 userDB2 = UserDB2();

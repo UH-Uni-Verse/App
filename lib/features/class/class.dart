@@ -4,12 +4,16 @@ import 'package:app/features/user/profile.dart';
 import 'package:app/features/user/messages.dart';
 import 'package:app/features/marketplace/marketplace.dart';
 import 'package:app/features/class/data/class_data.dart';
+import 'package:app/features/user/data/user_data.dart';
+import 'package:app/features/user/data/user_provider.dart';
 import 'package:app/features/class/data/class_provider.dart';
+import 'package:app/features/user/other_profile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 class ClassPage extends StatefulWidget {
-  const ClassPage({Key? key});
+  final String classID;
+
+  const ClassPage({Key? key, required this.classID}) : super(key: key);
 
   @override
   _ClassPageState createState() => _ClassPageState();
@@ -20,112 +24,122 @@ class _ClassPageState extends State<ClassPage> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-      final userDB = ref.read(userDBProvider);
-      UserData userData = userDB.getUser('class-001');
+        final userDB2 = ref.read(userDBProvider2);
+        UserData2 userData = userDB2.getUser(widget.classID);
 
-      return Scaffold(
-        appBar: AppBar(),
-        body: ListView(
-          children: <Widget>[
-            Container(
-              height: 250,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.green, Colors.green.shade900],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  stops: [0.5, 0.9],
+        List<String> studentNames = userData.students.split(', ');
+
+        return Scaffold(
+          appBar: AppBar(),
+          body: ListView(
+            children: <Widget>[
+              Container(
+                height: 250,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.green, Colors.green.shade900],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    stops: [0.5, 0.9],
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        CircleAvatar(
+                          backgroundColor: Colors.white70,
+                          minRadius: 60.0,
+                          child: CircleAvatar(
+                            radius: 50.0,
+                            backgroundImage:
+                            AssetImage(userData.imagePath),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      userData.name,
+                      style: TextStyle(
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      userData.professor,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      CircleAvatar(
-                        backgroundColor: Colors.white70,
-                        minRadius: 60.0,
-                        child: CircleAvatar(
-                          radius: 50.0,
-                          backgroundImage:
-                          AssetImage('assets/images/hawaii-image.jpg'),
+              Container(
+                child: Column(
+                  children: <Widget>[
+                    ListTile(
+                      title: Text(
+                        'Class Description',
+                        style: TextStyle(
+                          color: Colors.green.shade900,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    // class name
-                    userData.name,
-                    style: TextStyle(
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    // professor
-                    userData.email,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              child: Column(
-                children: <Widget>[
-                  ListTile(
-                    title: Text(
-                      'Class Description',
-                      style: TextStyle(
-                        color: Colors.green.shade900,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                      subtitle: Text(
+                        userData.description,
+                        style: TextStyle(fontSize: 18),
                       ),
                     ),
-                    subtitle: Text(
-                      //class description
-                      userData.email,
-                      style: TextStyle(
-                          fontSize: 18
+                    Divider(),
+                    ListTile(
+                      title: Text(
+                        'Students Enrolled',
+                        style: TextStyle(
+                          color: Colors.green.shade900,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: studentNames.map((studentName) {
+                          return GestureDetector(
+                            onTap: () async {
+                              // Find the user's ID by name
+                              String userId = userDB.getUserIDByName(studentName);
+
+                              // Navigate to OtherProfilePage with the user's id
+                              await Navigator.of(context).push(MaterialPageRoute(
+                                builder: (BuildContext context) => OtherProfilePage(studentID: userId),
+                              ));
+                            },
+                            child: Text(
+                              studentName,
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.blue),
+                            ),
+                          );
+                        }).toList(),
                       ),
                     ),
-                  ),
-                  Divider(),
-                  ListTile(
-                    title: Text(
-                      'Students Enrolled',
-                      style: TextStyle(
-                        color: Colors.green.shade900,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Text(
-                      //ClassInfo.studentsEnrolled,
-                      userData.email,
-                      style: TextStyle(
-                          fontSize: 18
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-        drawer: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
-          child: ListView(
+                  ],
+                ),
+              )
+            ],
+          ),
+          drawer: Drawer(
+            child: ListView(
               padding: EdgeInsets.zero,
               children: [
                 ListTile(
@@ -145,7 +159,6 @@ class _ClassPageState extends State<ClassPage> {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) => ProfilePage()));
                   },
-
                 ),
                 ListTile(
                   title: Text("Messages"),
@@ -155,7 +168,6 @@ class _ClassPageState extends State<ClassPage> {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) => MessagesPage()));
                   },
-
                 ),
                 ListTile(
                   title: Text("Marketplace"),
@@ -163,16 +175,15 @@ class _ClassPageState extends State<ClassPage> {
                   onTap: () {
                     Navigator.of(context).pop();
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => MarketplacePage()));
+                        builder: (BuildContext context) =>
+                            MarketplacePage()));
                   },
-
                 ),
-                //add new pages here
-              ]
-
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }

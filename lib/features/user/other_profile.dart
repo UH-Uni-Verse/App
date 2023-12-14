@@ -5,17 +5,20 @@ import 'package:app/features/user/messages.dart';
 import 'package:app/features/marketplace/marketplace.dart';
 import 'package:app/features/user/data/user_data.dart';
 
+class OtherProfilePage extends StatefulWidget {
+  final String studentID;
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  const OtherProfilePage({Key? key, required this.studentID}) : super(key: key);
+
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _OtherProfilePageState createState() => _OtherProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _OtherProfilePageState extends State<OtherProfilePage> {
   @override
   Widget build(BuildContext context) {
-    UserData userData = userDB.getUser('001');
+    UserData userData = userDB.getUser(widget.studentID);
+
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
@@ -42,8 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       minRadius: 60.0,
                       child: CircleAvatar(
                         radius: 50.0,
-                        backgroundImage:
-                        AssetImage('assets/images/hawaii-image.jpg'),
+                        backgroundImage: AssetImage(userData.imagePath),
                       ),
                     ),
                   ],
@@ -52,7 +54,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 10,
                 ),
                 Text(
-                  //ProfileValues.userName,
                   userData.name,
                   style: TextStyle(
                     fontSize: 35,
@@ -61,7 +62,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Text(
-                  //ProfileValues.userMajor,
                   userData.major,
                   style: TextStyle(
                     color: Colors.white,
@@ -84,11 +84,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   subtitle: Text(
-                   // ProfileValues.userEmail,
                     userData.email,
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ),
                 Divider(),
@@ -102,11 +99,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   subtitle: Text(
-                    //ProfileValues.userInterest,
                     userData.interests,
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ),
                 Divider(),
@@ -120,11 +114,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   subtitle: Text(
-                    //ProfileValues.userInterest,
                     userData.classes,
-                    style: TextStyle(
-                        fontSize: 18
-                    ),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ),
               ],
@@ -133,54 +124,47 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
       drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              ListTile(
-                title: Text("Home Page"),
-                trailing: Icon(Icons.arrow_forward),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => HomePage()));
-                },
-              ),
-              ListTile(
-                title: Text("Profile Page"),
-                trailing: Icon(Icons.arrow_forward),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => ProfilePage()));
-                },
-
-              ),
-              ListTile(
-                title: Text("Messages"),
-                trailing: Icon(Icons.arrow_forward),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => MessagesPage()));
-                },
-
-              ),
-              ListTile(
-                title: Text("Marketplace"),
-                trailing: Icon(Icons.arrow_forward),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => MarketplacePage()));
-                },
-
-              ),
-              //add new pages here
-            ]
-
+          padding: EdgeInsets.zero,
+          children: [
+            ListTile(
+              title: Text("Home Page"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => HomePage()));
+              },
+            ),
+            ListTile(
+              title: Text("Profile Page"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => ProfilePage()));
+              },
+            ),
+            ListTile(
+              title: Text("Messages"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => MessagesPage()));
+              },
+            ),
+            ListTile(
+              title: Text("Marketplace"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        MarketplacePage()));
+              },
+            ),
+          ],
         ),
       ),
     );
